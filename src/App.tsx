@@ -1,64 +1,13 @@
-import { type MouseEvent, useState } from "react"
+import { type MouseEvent, useEffect, useState } from "react"
 import { AppPreview } from "./AppPreview"
+import {
+  type DownloadPlatform,
+  type ReleaseDownloadOptions,
+  fetchLatestReleaseDownloadOptions,
+} from "./release-data"
 
-type DownloadPlatform = "linux" | "macos"
-
-type DownloadOption = {
-  label: string
-  detail: string
-  fileName: string
-  href: string
-}
-
-const releaseTag = "v0.6.30"
-
-const releaseBaseUrl = `https://github.com/openusage-community/openusage/releases/download/${releaseTag}`
 const assetBaseUrl = import.meta.env.BASE_URL
-
-const downloadOptions: Record<DownloadPlatform, { title: string; intro: string; options: DownloadOption[] }> = {
-  linux: {
-    title: "Download OpenUsage for Linux",
-    intro: "Choose the package for your distro. The download starts immediately after selection.",
-    options: [
-      {
-        label: "Ubuntu / Debian",
-        detail: "Best for Ubuntu, Debian, Linux Mint, Pop!_OS",
-        fileName: "OpenUsage_0.6.30_amd64.deb",
-        href: `${releaseBaseUrl}/OpenUsage_0.6.30_amd64.deb`,
-      },
-      {
-        label: "Fedora / RHEL",
-        detail: "Best for Fedora, Red Hat, CentOS, openSUSE",
-        fileName: "OpenUsage-0.6.30-1.x86_64.rpm",
-        href: `${releaseBaseUrl}/OpenUsage-0.6.30-1.x86_64.rpm`,
-      },
-      {
-        label: "AppImage",
-        detail: "Portable build for most modern Linux desktops",
-        fileName: "OpenUsage_0.6.30_amd64.AppImage",
-        href: `${releaseBaseUrl}/OpenUsage_0.6.30_amd64.AppImage`,
-      },
-    ],
-  },
-  macos: {
-    title: "Download OpenUsage for macOS",
-    intro: "Choose the Mac chip type. The download starts immediately after selection.",
-    options: [
-      {
-        label: "Apple Silicon",
-        detail: "For M1, M2, M3, and M4 Macs",
-        fileName: "OpenUsage_0.6.30_aarch64.dmg",
-        href: `${releaseBaseUrl}/OpenUsage_0.6.30_aarch64.dmg`,
-      },
-      {
-        label: "Intel Mac",
-        detail: "For older x64 Intel Macs",
-        fileName: "OpenUsage_0.6.30_x64.dmg",
-        href: `${releaseBaseUrl}/OpenUsage_0.6.30_x64.dmg`,
-      },
-    ],
-  },
-}
+const releasesUrl = "https://github.com/openusage-community/openusage/releases"
 
 const features = [
   ["Capture", "Log usage as you work", "OpenUsage watches prompts, model calls, and subscription activity across your AI tools, then turns scattered activity into one calm daily ledger.", "Browser, desktop, and manual entries"],
@@ -133,27 +82,60 @@ function PlatformLogo({ file, className }: { file: string; className: string }) 
   return <img className={`platform-logo ${className}`} src={`${assetBaseUrl}references/${file}`} alt="" aria-hidden="true" />
 }
 
-function DownloadModal({ platform, onClose }: { platform: DownloadPlatform; onClose: () => void }) {
-  const config = downloadOptions[platform]
+function DownloadModal({
+  platform,
+  release,
+  releaseError,
+  onClose,
+}: {
+  platform: DownloadPlatform
+  release: ReleaseDownloadOptions | null
+  releaseError: string | null
+  onClose: () => void
+}) {
+  const config = release?.options[platform]
+  const title = platform === "linux" ? "Download OpenUsage for Linux" : "Download OpenUsage for macOS"
 
   return (
     <div className="download-modal-backdrop" role="presentation" onClick={onClose}>
       <section className="download-modal" role="dialog" aria-modal="true" aria-labelledby="download-modal-title" onClick={(event) => event.stopPropagation()}>
         <button className="download-modal-close" type="button" aria-label="Close download options" onClick={onClose}>×</button>
-        <span className="kicker">Latest release {releaseTag}</span>
-        <h2 id="download-modal-title">{config.title}</h2>
-        <p>{config.intro}</p>
-        <div className="download-options">
-          {config.options.map((option) => (
-            <a className="download-option" href={option.href} key={option.fileName} onClick={onClose}>
+        <span className="kicker">{release ? `Latest release ${release.tag}` : "Loading latest release"}</span>
+        <h2 id="download-modal-title">{config?.title ?? title}</h2>
+        <p>{config?.intro ?? "Fetching the newest release from GitHub."}</p>
+        {!release && !releaseError ? (
+          <div className="download-options">
+            <div className="download-option" aria-live="polite">
               <span>
-                <strong>{option.label}</strong>
-                <small>{option.detail}</small>
+                <strong>Checking GitHub</strong>
+                <small>Release assets will appear here automatically.</small>
               </span>
-              <em>{option.fileName}</em>
+              <em>Please wait</em>
+            </div>
+          </div>
+        ) : releaseError || config?.options.length === 0 ? (
+          <div className="download-options">
+            <a className="download-option" href={releasesUrl}>
+              <span>
+                <strong>Open GitHub Releases</strong>
+                <small>{releaseError ?? "No matching package was found for this platform in the latest release."}</small>
+              </span>
+              <em>Manual download</em>
             </a>
-          ))}
-        </div>
+          </div>
+        ) : (
+          <div className="download-options">
+            {config?.options.map((option) => (
+              <a className="download-option" href={option.href} key={option.fileName} onClick={onClose}>
+                <span>
+                  <strong>{option.label}</strong>
+                  <small>{option.detail}</small>
+                </span>
+                <em>{option.fileName}</em>
+              </a>
+            ))}
+          </div>
+        )}
       </section>
     </div>
   )
@@ -163,6 +145,34 @@ export default function App() {
   const [isDark, setIsDark] = useState(true)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [downloadPlatform, setDownloadPlatform] = useState<DownloadPlatform | null>(null)
+  const [release, setRelease] = useState<ReleaseDownloadOptions | null>(null)
+  const [releaseError, setReleaseError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let isCancelled = false
+
+    fetchLatestReleaseDownloadOptions()
+      .then((latestRelease) => {
+        if (isCancelled) {
+          return
+        }
+
+        setRelease(latestRelease)
+        setReleaseError(null)
+      })
+      .catch((error: unknown) => {
+        if (isCancelled) {
+          return
+        }
+
+        console.error(error)
+        setReleaseError("Latest release data is unavailable right now.")
+      })
+
+    return () => {
+      isCancelled = true
+    }
+  }, [])
 
   function handleSectionLinkClick(event: MouseEvent<HTMLAnchorElement>, sectionId: string) {
     const section = document.getElementById(sectionId)
@@ -214,7 +224,7 @@ export default function App() {
             </div>
           </div>
           <div className="visual">
-            <AppPreview />
+            <AppPreview releaseTag={release?.tag} />
           </div>
         </header>
 
@@ -339,7 +349,7 @@ export default function App() {
           <span>© 2026 OpenUsage. Own your AI footprint.</span>
         </footer>
       </div>
-      {downloadPlatform ? <DownloadModal platform={downloadPlatform} onClose={() => setDownloadPlatform(null)} /> : null}
+      {downloadPlatform ? <DownloadModal platform={downloadPlatform} release={release} releaseError={releaseError} onClose={() => setDownloadPlatform(null)} /> : null}
     </main>
   )
 }

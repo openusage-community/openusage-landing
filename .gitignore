@@ -3,3 +3,4 @@
 dist/
 node_modules/
 verification/
+.tmp-tests/

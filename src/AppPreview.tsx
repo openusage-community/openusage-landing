@@ -205,7 +205,7 @@ function SettingsView({
   )
 }
 
-export function AppPreview() {
+export function AppPreview({ releaseTag }: { releaseTag?: string }) {
   const [activeView, setActiveView] = useState<View>("home")
   const [displayMode, setDisplayMode] = useState<DisplayMode>("used")
   const [refreshingId, setRefreshingId] = useState<string | null>(null)
@@ -258,7 +258,7 @@ export function AppPreview() {
             </div>
           )}
           <footer className="preview-footer">
-            <span>v0.6.30</span>
+            <span>{releaseTag ?? "Latest release"}</span>
             <span>Updated just now</span>
           </footer>
         </div>
