@@ -1,6 +1,64 @@
 import { useState } from "react"
 import { AppPreview } from "./AppPreview"
 
+type DownloadPlatform = "linux" | "macos"
+
+type DownloadOption = {
+  label: string
+  detail: string
+  fileName: string
+  href: string
+}
+
+const releaseTag = "v0.6.30"
+
+const releaseBaseUrl = `https://github.com/openusage-community/openusage/releases/download/${releaseTag}`
+
+const downloadOptions: Record<DownloadPlatform, { title: string; intro: string; options: DownloadOption[] }> = {
+  linux: {
+    title: "Download OpenUsage for Linux",
+    intro: "Choose the package for your distro. The download starts immediately after selection.",
+    options: [
+      {
+        label: "Ubuntu / Debian",
+        detail: "Best for Ubuntu, Debian, Linux Mint, Pop!_OS",
+        fileName: "OpenUsage_0.6.30_amd64.deb",
+        href: `${releaseBaseUrl}/OpenUsage_0.6.30_amd64.deb`,
+      },
+      {
+        label: "Fedora / RHEL",
+        detail: "Best for Fedora, Red Hat, CentOS, openSUSE",
+        fileName: "OpenUsage-0.6.30-1.x86_64.rpm",
+        href: `${releaseBaseUrl}/OpenUsage-0.6.30-1.x86_64.rpm`,
+      },
+      {
+        label: "AppImage",
+        detail: "Portable build for most modern Linux desktops",
+        fileName: "OpenUsage_0.6.30_amd64.AppImage",
+        href: `${releaseBaseUrl}/OpenUsage_0.6.30_amd64.AppImage`,
+      },
+    ],
+  },
+  macos: {
+    title: "Download OpenUsage for macOS",
+    intro: "Choose the Mac chip type. The download starts immediately after selection.",
+    options: [
+      {
+        label: "Apple Silicon",
+        detail: "For M1, M2, M3, and M4 Macs",
+        fileName: "OpenUsage_0.6.30_aarch64.dmg",
+        href: `${releaseBaseUrl}/OpenUsage_0.6.30_aarch64.dmg`,
+      },
+      {
+        label: "Intel Mac",
+        detail: "For older x64 Intel Macs",
+        fileName: "OpenUsage_0.6.30_x64.dmg",
+        href: `${releaseBaseUrl}/OpenUsage_0.6.30_x64.dmg`,
+      },
+    ],
+  },
+}
+
 const features = [
   ["Capture", "Log usage as you work", "OpenUsage watches prompts, model calls, and subscription activity across your AI tools, then turns scattered activity into one calm daily ledger.", "Browser, desktop, and manual entries"],
   ["Understand", "See what actually helped", "Tag sessions by project, outcome, or mood. The timeline reveals which tools saved time, which created rework, and where your best ideas started.", "Project notes, outcomes, and time saved"],
@@ -36,9 +94,36 @@ function PlatformLogo({ file, className }: { file: string; className: string }) 
   return <img className={`platform-logo ${className}`} src={`/references/${file}`} alt="" aria-hidden="true" />
 }
 
+function DownloadModal({ platform, onClose }: { platform: DownloadPlatform; onClose: () => void }) {
+  const config = downloadOptions[platform]
+
+  return (
+    <div className="download-modal-backdrop" role="presentation" onClick={onClose}>
+      <section className="download-modal" role="dialog" aria-modal="true" aria-labelledby="download-modal-title" onClick={(event) => event.stopPropagation()}>
+        <button className="download-modal-close" type="button" aria-label="Close download options" onClick={onClose}>×</button>
+        <span className="kicker">Latest release {releaseTag}</span>
+        <h2 id="download-modal-title">{config.title}</h2>
+        <p>{config.intro}</p>
+        <div className="download-options">
+          {config.options.map((option) => (
+            <a className="download-option" href={option.href} key={option.fileName} onClick={onClose}>
+              <span>
+                <strong>{option.label}</strong>
+                <small>{option.detail}</small>
+              </span>
+              <em>{option.fileName}</em>
+            </a>
+          ))}
+        </div>
+      </section>
+    </div>
+  )
+}
+
 export default function App() {
   const [isDark, setIsDark] = useState(true)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [downloadPlatform, setDownloadPlatform] = useState<DownloadPlatform | null>(null)
 
   return (
     <main className={isDark ? "theme-dark" : "theme-light"}>
@@ -105,24 +190,24 @@ export default function App() {
             <p>OpenUsage is designed as a desktop companion for personal AI work. Start on Linux or macOS today, with Windows support coming soon.</p>
           </div>
           <div className="platforms" aria-label="Supported operating systems">
-            <article className="platform-card">
+            <button className="platform-card" type="button" onClick={() => setDownloadPlatform("linux")}>
               <PlatformLogo file="linux-tux-svgrepo-com.svg" className="platform-logo-linux" />
               <span className="platform-status">Available now</span>
               <h3>Linux</h3>
               <p>A focused desktop build for personal AI ledgers on Ubuntu, Fedora, Arch, and other modern distributions.</p>
-            </article>
-            <article className="platform-card">
+            </button>
+            <button className="platform-card" type="button" onClick={() => setDownloadPlatform("macos")}>
               <PlatformLogo file="apple-173-svgrepo-com-2.svg" className="platform-logo-macos" />
               <span className="platform-status">Available now</span>
               <h3>macOS</h3>
               <p>Native-feeling tracking for Mac workflows across research, writing, coding, and creative AI tools.</p>
-            </article>
-            <article className="platform-card coming">
+            </button>
+            <button className="platform-card coming" type="button" disabled>
               <PlatformLogo file="windows-logo.svg" className="platform-logo-windows" />
               <span className="platform-status">Coming soon</span>
               <h3>Windows</h3>
               <p>A Windows build is on the roadmap so the same free, open-source ledger can follow every desktop workflow.</p>
-            </article>
+            </button>
           </div>
         </section>
 
@@ -186,6 +271,7 @@ export default function App() {
           <span>© 2026 OpenUsage. Own your AI footprint.</span>
         </footer>
       </div>
+      {downloadPlatform ? <DownloadModal platform={downloadPlatform} onClose={() => setDownloadPlatform(null)} /> : null}
     </main>
   )
 }
