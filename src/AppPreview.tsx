@@ -20,6 +20,32 @@ function isDarkBrand(provider: DemoProvider) {
   return getRelativeLuminance(provider.brandColor) < 0.16
 }
 
+function ProviderIcon({
+  provider,
+  className = "",
+}: {
+  provider: DemoProvider
+  className?: string
+}) {
+  const classes = [
+    "preview-mask-icon",
+    className,
+    isDarkBrand(provider) ? "is-dark-brand" : "",
+  ].filter(Boolean).join(" ")
+
+  return (
+    <span
+      className={classes}
+      aria-hidden="true"
+      style={{
+        backgroundColor: provider.brandColor,
+        maskImage: `url(${provider.icon})`,
+        WebkitMaskImage: `url(${provider.icon})`,
+      }}
+    />
+  )
+}
+
 function GaugeIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -99,7 +125,7 @@ function ProviderCard({
     <article className={refreshing ? "preview-provider is-refreshing" : "preview-provider"}>
       <button className="preview-provider-title" type="button" onClick={onOpen}>
         <span>
-          <img className={isDarkBrand(provider) ? "preview-provider-icon is-dark-brand" : "preview-provider-icon"} src={provider.icon} alt="" />
+          <ProviderIcon provider={provider} className="preview-provider-icon" />
           <strong>{provider.name}</strong>
           <StatusDot status={provider.status} />
         </span>
@@ -130,7 +156,7 @@ function SideNav({
       </button>
       {demoProviders.map((provider) => (
         <button key={provider.id} className={activeView === provider.id ? "active" : ""} type="button" aria-label={provider.name} onClick={() => onViewChange(provider.id)}>
-          <span className={isDarkBrand(provider) ? "preview-mask-icon is-dark-brand" : "preview-mask-icon"} style={{ backgroundColor: provider.brandColor, maskImage: `url(${provider.icon})`, WebkitMaskImage: `url(${provider.icon})` }} />
+          <ProviderIcon provider={provider} />
         </button>
       ))}
       <span className="preview-spacer" />
@@ -169,7 +195,7 @@ function SettingsView({
       <div className="preview-settings-list">
         {demoProviders.map((provider) => (
           <span key={provider.id}>
-            <img className={isDarkBrand(provider) ? "preview-settings-icon is-dark-brand" : "preview-settings-icon"} src={provider.icon} alt="" />
+            <ProviderIcon provider={provider} className="preview-settings-icon" />
             {provider.name}
             <input type="checkbox" defaultChecked />
           </span>

@@ -186,16 +186,11 @@
   gap: 8px;
 }
 
-.preview-provider-title img,
-.preview-settings-list img {
+.preview-provider-icon,
+.preview-settings-icon {
   width: 18px;
   height: 18px;
-}
-
-.theme-dark .preview-provider-icon.is-dark-brand,
-.theme-dark .preview-settings-icon.is-dark-brand {
-  filter: invert(1) brightness(1.35) saturate(.2);
-  opacity: .92;
+  flex: 0 0 18px;
 }
 
 .preview-provider-title strong {
