@@ -4,6 +4,22 @@ import { demoProviders, type DemoProvider, type Metric } from "./demo-data"
 type View = "home" | "settings" | string
 type DisplayMode = "used" | "left"
 
+function getRelativeLuminance(hexColor: string) {
+  const hex = hexColor.replace("#", "")
+  if (hex.length !== 6) return 1
+
+  const channels = [0, 2, 4].map((start) => {
+    const value = Number.parseInt(hex.slice(start, start + 2), 16) / 255
+    return value <= 0.03928 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4
+  })
+
+  return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722
+}
+
+function isDarkBrand(provider: DemoProvider) {
+  return getRelativeLuminance(provider.brandColor) < 0.16
+}
+
 function GaugeIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -83,7 +99,7 @@ function ProviderCard({
     <article className={refreshing ? "preview-provider is-refreshing" : "preview-provider"}>
       <button className="preview-provider-title" type="button" onClick={onOpen}>
         <span>
-          <img src={provider.icon} alt="" />
+          <img className={isDarkBrand(provider) ? "preview-provider-icon is-dark-brand" : "preview-provider-icon"} src={provider.icon} alt="" />
           <strong>{provider.name}</strong>
           <StatusDot status={provider.status} />
         </span>
@@ -114,7 +130,7 @@ function SideNav({
       </button>
       {demoProviders.map((provider) => (
         <button key={provider.id} className={activeView === provider.id ? "active" : ""} type="button" aria-label={provider.name} onClick={() => onViewChange(provider.id)}>
-          <span className="preview-mask-icon" style={{ backgroundColor: provider.brandColor, maskImage: `url(${provider.icon})`, WebkitMaskImage: `url(${provider.icon})` }} />
+          <span className={isDarkBrand(provider) ? "preview-mask-icon is-dark-brand" : "preview-mask-icon"} style={{ backgroundColor: provider.brandColor, maskImage: `url(${provider.icon})`, WebkitMaskImage: `url(${provider.icon})` }} />
         </button>
       ))}
       <span className="preview-spacer" />
@@ -153,7 +169,7 @@ function SettingsView({
       <div className="preview-settings-list">
         {demoProviders.map((provider) => (
           <span key={provider.id}>
-            <img src={provider.icon} alt="" />
+            <img className={isDarkBrand(provider) ? "preview-settings-icon is-dark-brand" : "preview-settings-icon"} src={provider.icon} alt="" />
             {provider.name}
             <input type="checkbox" defaultChecked />
           </span>

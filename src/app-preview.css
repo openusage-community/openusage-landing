@@ -77,6 +77,11 @@
   -webkit-mask-size: contain;
 }
 
+.theme-dark .preview-mask-icon.is-dark-brand {
+  background-color: #EAF2FF !important;
+  opacity: .92;
+}
+
 .preview-sidenav button.active {
   color: var(--ink-blue);
 }
@@ -185,6 +190,12 @@
 .preview-settings-list img {
   width: 18px;
   height: 18px;
+}
+
+.theme-dark .preview-provider-icon.is-dark-brand,
+.theme-dark .preview-settings-icon.is-dark-brand {
+  filter: invert(1) brightness(1.35) saturate(.2);
+  opacity: .92;
 }
 
 .preview-provider-title strong {
