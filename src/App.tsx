@@ -190,7 +190,7 @@ export default function App() {
             <a href="#platforms" onClick={(event) => handleSectionLinkClick(event, "platforms")}>Platforms</a>
             <a href="#proof" onClick={(event) => handleSectionLinkClick(event, "proof")}>Proof</a>
             <a href="#faq" onClick={(event) => handleSectionLinkClick(event, "faq")}>FAQ</a>
-            <a className="mini-cta" href="#pricing" onClick={(event) => handleSectionLinkClick(event, "pricing")}>Download</a>
+            <a className="mini-cta" href="#platforms" onClick={(event) => handleSectionLinkClick(event, "platforms")}>Download</a>
             <button className="theme-toggle" type="button" aria-pressed={isDark} onClick={() => setIsDark((current) => !current)}>
               <span className="dot" aria-hidden="true" />
               <span>{isDark ? "Light" : "Dark"}</span>
@@ -203,7 +203,7 @@ export default function App() {
             <h1>Know which AI tools are worth keeping. <span className="tagline">Stop guessing.</span></h1>
             <p className="subhead">OpenUsage is a private command center for individuals using ChatGPT, Claude, Cursor, image models, and niche assistants. Track cost, time saved, renewals, and outcomes in one blue notebook for your AI life.</p>
             <div className="actions">
-              <a className="btn primary" href="#pricing" onClick={(event) => handleSectionLinkClick(event, "pricing")}>Download for free</a>
+              <a className="btn primary" href="#platforms" onClick={(event) => handleSectionLinkClick(event, "platforms")}>Download for free</a>
               <a className="btn secondary" href="https://github.com/openusage-community/openusage" aria-label="Open OpenUsage on GitHub"><GithubIcon />Github</a>
             </div>
             <div className="trust-line" aria-label="Product highlights">
