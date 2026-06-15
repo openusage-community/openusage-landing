@@ -1,18 +1,25 @@
 # OpenUsage Landing
 
-Static marketing landing page for OpenUsage.
+Marketing landing page for OpenUsage with an interactive React preview of the app.
 
 ## Tech
 
-- Plain HTML
-- Plain CSS
-- Plain JavaScript
-- No build step
+- React
+- TypeScript
+- Vite
+- CSS
 
 ## Run locally
 
 ```bash
-python3 -m http.server 4173
+npm install
+npm run dev
 ```
 
-Open http://127.0.0.1:4173/.
+Open the URL printed by Vite.
+
+## Build
+
+```bash
+npm run build
+```
