@@ -47,6 +47,9 @@
         .theme-dark .chart { background: linear-gradient(180deg, rgba(234,242,255,.08), rgba(20,65,132,.18)); }
         .theme-dark .feature:nth-child(1) { background: linear-gradient(160deg, rgba(18,47,98,.9), rgba(10,29,64,.78)); }
         .theme-dark .feature:nth-child(4), .theme-dark .proof-band { background: linear-gradient(145deg, #061B3D, #0C2A61); }
+        .theme-dark .proof-stats div { border-color: rgba(255,255,255,.14); background: rgba(255,255,255,.06); }
+        .theme-dark .proof-stats b { color: #DDEBFF; }
+        .theme-dark .proof-stats span { color: #AFC4E7; }
         .theme-dark .feature small { background: rgba(137,184,255,.12); color: #9CCAFF; }
           .theme-dark .platform-card { background: linear-gradient(180deg, rgba(12,32,69,.78), rgba(10,29,64,.66)); border-color: rgba(137,184,255,.2); box-shadow: 0 24px 70px rgba(0,8,24,.26); }
           .theme-dark .platform-logo { opacity: .32; filter: saturate(.95) drop-shadow(0 18px 34px rgba(0,8,24,.18)); }
@@ -143,13 +146,13 @@
         .feature h3 { margin-top: 18px; font-size: clamp(1.5rem, 2.2vw, 2.2rem); letter-spacing: -.04em; }
         .feature p { color: inherit; opacity: .76; line-height: 1.65; font-size: 1.02rem; }
         .feature small { display: inline-flex; margin-top: 18px; padding: 9px 12px; border-radius: 999px; background: rgba(20,99,255,.1); color: var(--accent-blue); font-weight: 800; }
-        .proof-band { border-radius: 34px; background: var(--ink-blue); color: white; padding: clamp(24px, 4vw, 44px); display: grid; grid-template-columns: .9fr 1.1fr; gap: 26px; align-items: center; box-shadow: 0 34px 80px rgba(3,16,39,.18); }
+        .proof-band { border: 1px solid rgba(20,99,255,.14); border-radius: 34px; background: linear-gradient(145deg, rgba(255,255,255,.86), rgba(232,242,255,.72)); color: var(--ink-blue); padding: clamp(24px, 4vw, 44px); display: grid; grid-template-columns: .9fr 1.1fr; gap: 26px; align-items: center; box-shadow: 0 34px 80px rgba(15,53,118,.1); }
         .proof-band blockquote { margin: clamp(24px, 3vw, 34px) 0 clamp(8px, 1.2vw, 14px); font-family: 'Charter', Georgia, serif; font-size: clamp(1.32rem, 2.2vw, 2.35rem); line-height: 1.14; letter-spacing: -.035em; }
         .proof-band cite { display: block; margin-top: 20px; font-style: normal; color: #A9C9FF; font-weight: 800; }
         .proof-stats { display: grid; gap: 12px; }
-        .proof-stats div { padding: 18px; border: 1px solid rgba(255,255,255,.14); border-radius: 22px; background: rgba(255,255,255,.06); }
-        .proof-stats b { display: block; font-size: 2.1rem; letter-spacing: -.055em; color: #DDEBFF; }
-        .proof-stats span { color: #AFC4E7; }
+        .proof-stats div { padding: 18px; border: 1px solid rgba(20,99,255,.13); border-radius: 22px; background: rgba(255,255,255,.7); }
+        .proof-stats b { display: block; font-size: 2.1rem; letter-spacing: -.055em; color: var(--ink-blue); }
+        .proof-stats span { color: #53698D; }
         .pricing { display: grid; grid-template-columns: .85fr 1.15fr; gap: 20px; align-items: stretch; }
         .price-copy { padding: 34px; border-radius: var(--radius-lg); background: #EAF2FF; }
         .price-card { padding: 34px; border-radius: var(--radius-lg); background: white; border: 1px solid rgba(20,99,255,.16); box-shadow: 0 26px 70px rgba(15,53,118,.1); }

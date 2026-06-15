@@ -265,7 +265,7 @@ export default function App() {
         <section id="proof" aria-labelledby="proof-title">
           <div className="proof-band">
             <div>
-              <h2 id="proof-title" style={{ color: "white" }}>OpenUsage Community is built in the open.</h2>
+              <h2 id="proof-title">OpenUsage Community is built in the open.</h2>
               <blockquote>Track the AI providers you already use, keep Linux support first-class, and own a desktop ledger that stays free to inspect, run, and improve.</blockquote>
             </div>
             <div className="proof-stats">
