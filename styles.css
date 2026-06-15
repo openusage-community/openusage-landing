@@ -139,13 +139,10 @@
         .features { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
         .feature { min-height: 250px; border: 1px solid rgba(20,99,255,.14); border-radius: var(--radius-lg); padding: clamp(22px, 3vw, 34px); background: rgba(255,255,255,.7); }
         .feature:nth-child(1) { grid-row: span 2; background: linear-gradient(160deg, white, #E8F2FF); }
-        .feature:nth-child(4) { background: var(--ink-blue); color: white; }
-        .feature:nth-child(4) h3, .feature:nth-child(4) .kicker { color: white; }
         .kicker { color: var(--accent-blue); text-transform: uppercase; letter-spacing: .14em; font-size: .75rem; font-weight: 900; }
         .feature h3 { margin-top: 18px; font-size: clamp(1.5rem, 2.2vw, 2.2rem); letter-spacing: -.04em; }
         .feature p { color: inherit; opacity: .76; line-height: 1.65; font-size: 1.02rem; }
         .feature small { display: inline-flex; margin-top: 18px; padding: 9px 12px; border-radius: 999px; background: rgba(20,99,255,.1); color: var(--accent-blue); font-weight: 800; }
-        .feature:nth-child(4) small { background: rgba(255,255,255,.12); color: #BFD8FF; }
         .proof-band { border-radius: 34px; background: var(--ink-blue); color: white; padding: clamp(24px, 4vw, 44px); display: grid; grid-template-columns: .9fr 1.1fr; gap: 26px; align-items: center; box-shadow: 0 34px 80px rgba(3,16,39,.18); }
         .proof-band blockquote { margin: clamp(24px, 3vw, 34px) 0 clamp(8px, 1.2vw, 14px); font-family: 'Charter', Georgia, serif; font-size: clamp(1.32rem, 2.2vw, 2.35rem); line-height: 1.14; letter-spacing: -.035em; }
         .proof-band cite { display: block; margin-top: 20px; font-style: normal; color: #A9C9FF; font-weight: 800; }
