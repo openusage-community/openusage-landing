@@ -37,7 +37,7 @@ function PlatformLogo({ file, className }: { file: string; className: string }) 
 }
 
 export default function App() {
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(true)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
