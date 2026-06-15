@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { type MouseEvent, useState } from "react"
 import { AppPreview } from "./AppPreview"
 
 type DownloadPlatform = "linux" | "macos"
@@ -73,6 +73,44 @@ const faqs = [
   ["How private is the ledger?", "OpenUsage is designed around metadata first: tool, time, cost, tags, and outcome. Sensitive prompt text can be excluded or stored locally in future desktop mode."],
 ]
 
+let activeScrollFrame = 0
+
+function smoothScrollToElement(element: HTMLElement, onComplete?: () => void) {
+  const startY = window.scrollY
+  const targetY = startY + element.getBoundingClientRect().top
+  const distance = targetY - startY
+  const duration = 650
+  const startTime = performance.now()
+
+  if (activeScrollFrame) {
+    cancelAnimationFrame(activeScrollFrame)
+  }
+
+  function animateScroll(now: number) {
+    const progress = Math.min((now - startTime) / duration, 1)
+    const easedProgress = 1 - Math.pow(1 - progress, 3)
+
+    window.scrollTo(0, Math.round(startY + distance * easedProgress))
+
+    if (progress < 1) {
+      activeScrollFrame = requestAnimationFrame(animateScroll)
+    } else {
+      activeScrollFrame = 0
+      onComplete?.()
+    }
+  }
+
+  activeScrollFrame = requestAnimationFrame(animateScroll)
+}
+
+function setHashWithoutScrollJump(sectionId: string) {
+  const currentX = window.scrollX
+  const currentY = window.scrollY
+
+  window.history.pushState(null, "", `#${sectionId}`)
+  window.scrollTo(currentX, currentY)
+}
+
 function LogoMark() {
   return (
     <div className="logo" aria-label="OpenUsage">
@@ -125,6 +163,18 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [downloadPlatform, setDownloadPlatform] = useState<DownloadPlatform | null>(null)
 
+  function handleSectionLinkClick(event: MouseEvent<HTMLAnchorElement>, sectionId: string) {
+    const section = document.getElementById(sectionId)
+
+    if (!section) {
+      return
+    }
+
+    event.preventDefault()
+    setIsMenuOpen(false)
+    smoothScrollToElement(section, () => setHashWithoutScrollJump(sectionId))
+  }
+
   return (
     <main className={isDark ? "theme-dark" : "theme-light"}>
       <div className="page">
@@ -136,11 +186,11 @@ export default function App() {
             <span aria-hidden="true" />
           </button>
           <div id="primary-menu" className={isMenuOpen ? "nav-links is-open" : "nav-links"}>
-            <a href="#features" onClick={() => setIsMenuOpen(false)}>Features</a>
-            <a href="#platforms" onClick={() => setIsMenuOpen(false)}>Platforms</a>
-            <a href="#proof" onClick={() => setIsMenuOpen(false)}>Proof</a>
-            <a href="#faq" onClick={() => setIsMenuOpen(false)}>FAQ</a>
-            <a className="mini-cta" href="#pricing" onClick={() => setIsMenuOpen(false)}>Download</a>
+            <a href="#features" onClick={(event) => handleSectionLinkClick(event, "features")}>Features</a>
+            <a href="#platforms" onClick={(event) => handleSectionLinkClick(event, "platforms")}>Platforms</a>
+            <a href="#proof" onClick={(event) => handleSectionLinkClick(event, "proof")}>Proof</a>
+            <a href="#faq" onClick={(event) => handleSectionLinkClick(event, "faq")}>FAQ</a>
+            <a className="mini-cta" href="#pricing" onClick={(event) => handleSectionLinkClick(event, "pricing")}>Download</a>
             <button className="theme-toggle" type="button" aria-pressed={isDark} onClick={() => setIsDark((current) => !current)}>
               <span className="dot" aria-hidden="true" />
               <span>{isDark ? "Light" : "Dark"}</span>
@@ -153,7 +203,7 @@ export default function App() {
             <h1>Know which AI tools are worth keeping. <span className="tagline">Stop guessing.</span></h1>
             <p className="subhead">OpenUsage is a private command center for individuals using ChatGPT, Claude, Cursor, image models, and niche assistants. Track cost, time saved, renewals, and outcomes in one blue notebook for your AI life.</p>
             <div className="actions">
-              <a className="btn primary" href="#pricing">Download for free</a>
+              <a className="btn primary" href="#pricing" onClick={(event) => handleSectionLinkClick(event, "pricing")}>Download for free</a>
               <a className="btn secondary" href="https://github.com/openusage-community/openusage" aria-label="Open OpenUsage on GitHub"><GithubIcon />Github</a>
             </div>
             <div className="trust-line" aria-label="Product highlights">
@@ -282,7 +332,7 @@ export default function App() {
         <footer>
           <LogoMark />
           <div className="footer-links" aria-label="Footer links">
-            <a href="#features">Features</a>
+            <a href="#features" onClick={(event) => handleSectionLinkClick(event, "features")}>Features</a>
             <a href="mailto:peterbaikov12@proton.me">Contact</a>
           </div>
           <span>© 2026 OpenUsage. Own your AI footprint.</span>
