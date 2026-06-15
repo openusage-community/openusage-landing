@@ -174,6 +174,27 @@ export default function App() {
     }
   }, [])
 
+  function refreshLatestRelease({ clearRelease = false } = {}) {
+    if (clearRelease) {
+      setRelease(null)
+    }
+
+    fetchLatestReleaseDownloadOptions()
+      .then((latestRelease) => {
+        setRelease(latestRelease)
+        setReleaseError(null)
+      })
+      .catch((error: unknown) => {
+        console.error(error)
+        setReleaseError("Latest release data is unavailable right now.")
+      })
+  }
+
+  function openDownloadModal(platform: DownloadPlatform) {
+    setDownloadPlatform(platform)
+    refreshLatestRelease({ clearRelease: true })
+  }
+
   function handleSectionLinkClick(event: MouseEvent<HTMLAnchorElement>, sectionId: string) {
     const section = document.getElementById(sectionId)
 
@@ -251,13 +272,13 @@ export default function App() {
             <p>OpenUsage is designed as a desktop companion for personal AI work. Start on Linux or macOS today, with Windows support coming soon.</p>
           </div>
           <div className="platforms" aria-label="Supported operating systems">
-            <button className="platform-card" type="button" onClick={() => setDownloadPlatform("linux")}>
+            <button className="platform-card" type="button" onClick={() => openDownloadModal("linux")}>
               <PlatformLogo file="linux-tux-svgrepo-com.svg" className="platform-logo-linux" />
               <span className="platform-status">Available now</span>
               <h3>Linux</h3>
               <p>A focused desktop build for personal AI ledgers on Ubuntu, Fedora, Arch, and other modern distributions.</p>
             </button>
-            <button className="platform-card" type="button" onClick={() => setDownloadPlatform("macos")}>
+            <button className="platform-card" type="button" onClick={() => openDownloadModal("macos")}>
               <PlatformLogo file="apple-173-svgrepo-com-2.svg" className="platform-logo-macos" />
               <span className="platform-status">Available now</span>
               <h3>macOS</h3>

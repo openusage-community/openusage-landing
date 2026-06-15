@@ -83,6 +83,7 @@ export function buildReleaseDownloadOptions(release: GitHubRelease): ReleaseDown
 
 export async function fetchLatestReleaseDownloadOptions(fetchImpl: typeof fetch = fetch): Promise<ReleaseDownloadOptions> {
   const response = await fetchImpl(latestReleaseUrl, {
+    cache: "no-store",
     headers: {
       Accept: "application/vnd.github+json",
     },

@@ -25,7 +25,7 @@ execFileSync("npx", [
   "--skipLibCheck",
 ], { stdio: "inherit" })
 
-const { buildReleaseDownloadOptions } = await import(`../${outDir}/release-data.js`)
+const { buildReleaseDownloadOptions, fetchLatestReleaseDownloadOptions } = await import(`../${outDir}/release-data.js`)
 
 test("builds download options from latest GitHub release assets", () => {
   const release = buildReleaseDownloadOptions({
@@ -59,4 +59,23 @@ test("omits missing package options instead of inventing URLs", () => {
 
   assert.equal(release.options.linux.options.length, 1)
   assert.equal(release.options.macos.options.length, 0)
+})
+
+test("fetches latest release without browser cache", async () => {
+  const calls = []
+  const release = await fetchLatestReleaseDownloadOptions(async (url, init) => {
+    calls.push({ url, init })
+
+    return {
+      ok: true,
+      json: async () => ({
+        tag_name: "v0.7.2",
+        assets: [],
+      }),
+    }
+  })
+
+  assert.equal(release.tag, "v0.7.2")
+  assert.equal(calls[0].init.cache, "no-store")
+  assert.equal(calls[0].init.headers.Accept, "application/vnd.github+json")
 })
