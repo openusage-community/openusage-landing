@@ -31,13 +31,15 @@ export type DemoProvider = {
   detail: Metric[]
 }
 
+const assetBaseUrl = import.meta.env.BASE_URL
+
 export const demoProviders: DemoProvider[] = [
   {
     id: "claude",
     name: "Claude",
     plan: "Max 5x",
     brandColor: "#DE7356",
-    icon: "/references/plugins/claude.svg",
+    icon: `${assetBaseUrl}references/plugins/claude.svg`,
     status: "on-track",
     metrics: [
       { type: "progress", label: "Session", used: 62, limit: 100, suffix: "%", color: "#DE7356", resets: "resets in 2h 14m" },
@@ -54,7 +56,7 @@ export const demoProviders: DemoProvider[] = [
     name: "Codex",
     plan: "Plus",
     brandColor: "#74AA9C",
-    icon: "/references/plugins/codex.svg",
+    icon: `${assetBaseUrl}references/plugins/codex.svg`,
     status: "ahead",
     metrics: [
       { type: "progress", label: "Session", used: 28, limit: 100, suffix: "%", color: "#74AA9C", resets: "resets in 5h" },
@@ -71,7 +73,7 @@ export const demoProviders: DemoProvider[] = [
     name: "Cursor",
     plan: "Pro",
     brandColor: "#111827",
-    icon: "/references/plugins/cursor.svg",
+    icon: `${assetBaseUrl}references/plugins/cursor.svg`,
     status: "behind",
     metrics: [
       { type: "progress", label: "Credits", used: 86, limit: 100, suffix: "credits", color: "#111827", resets: "runs out soon" },
@@ -88,7 +90,7 @@ export const demoProviders: DemoProvider[] = [
     name: "Gemini",
     plan: "Advanced",
     brandColor: "#4285F4",
-    icon: "/references/plugins/gemini.svg",
+    icon: `${assetBaseUrl}references/plugins/gemini.svg`,
     status: "ahead",
     metrics: [
       { type: "progress", label: "Pro", used: 32, limit: 100, suffix: "%", color: "#4285F4", resets: "68% left" },
@@ -104,7 +106,7 @@ export const demoProviders: DemoProvider[] = [
     name: "Kimi",
     plan: "Moonshot",
     brandColor: "#000000",
-    icon: "/references/plugins/kimi.svg",
+    icon: `${assetBaseUrl}references/plugins/kimi.svg`,
     status: "on-track",
     metrics: [
       { type: "progress", label: "Session", used: 46, limit: 100, suffix: "%", color: "#111827", resets: "resets in 3h 08m" },
@@ -121,7 +123,7 @@ export const demoProviders: DemoProvider[] = [
     name: "Perplexity",
     plan: "Pro",
     brandColor: "#20808D",
-    icon: "/references/plugins/perplexity.svg",
+    icon: `${assetBaseUrl}references/plugins/perplexity.svg`,
     status: "ahead",
     metrics: [
       { type: "progress", label: "API credits", used: 22, limit: 100, suffix: "%", color: "#20808D", resets: "78% left" },

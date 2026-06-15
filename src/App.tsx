@@ -13,6 +13,7 @@ type DownloadOption = {
 const releaseTag = "v0.6.30"
 
 const releaseBaseUrl = `https://github.com/openusage-community/openusage/releases/download/${releaseTag}`
+const assetBaseUrl = import.meta.env.BASE_URL
 
 const downloadOptions: Record<DownloadPlatform, { title: string; intro: string; options: DownloadOption[] }> = {
   linux: {
@@ -114,7 +115,7 @@ function setHashWithoutScrollJump(sectionId: string) {
 function LogoMark() {
   return (
     <div className="logo" aria-label="OpenUsage">
-      <img src="/references/logo1-2.png" alt="OpenUsage logo" />
+      <img src={`${assetBaseUrl}references/logo1-2.png`} alt="OpenUsage logo" />
       <span>OpenUsage Community</span>
     </div>
   )
@@ -129,7 +130,7 @@ function GithubIcon() {
 }
 
 function PlatformLogo({ file, className }: { file: string; className: string }) {
-  return <img className={`platform-logo ${className}`} src={`/references/${file}`} alt="" aria-hidden="true" />
+  return <img className={`platform-logo ${className}`} src={`${assetBaseUrl}references/${file}`} alt="" aria-hidden="true" />
 }
 
 function DownloadModal({ platform, onClose }: { platform: DownloadPlatform; onClose: () => void }) {
