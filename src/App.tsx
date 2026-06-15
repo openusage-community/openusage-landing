@@ -68,7 +68,7 @@ const features = [
 
 const faqs = [
   ["Is OpenUsage another AI chat app?", "No. It is the personal usage layer for the AI tools you already use. The point is to reveal cost, value, and patterns across your existing workflow."],
-  ["Do I need to connect every account?", "You can start with manual entries and browser capture. Deeper integrations are optional, and exports remain available regardless of plan."],
+  ["Do I need to connect every account?", "No. OpenUsage detects supported providers you already use and pulls their usage into the ledger automatically. Manual entries are only for anything outside the supported set."],
   ["Who is this for?", "Individuals who use several AI products: freelancers, students, creators, researchers, and operators who want a clearer view of what is worth keeping."],
   ["How private is the ledger?", "OpenUsage is designed around metadata first: tool, time, cost, tags, and outcome. Sensitive prompt text can be excluded or stored locally in future desktop mode."],
 ]
