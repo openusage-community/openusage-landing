@@ -77,7 +77,7 @@ function LogoMark() {
   return (
     <div className="logo" aria-label="OpenUsage">
       <img src="/references/logo1-2.png" alt="OpenUsage logo" />
-      <span>openusage</span>
+      <span>OpenUsage Community</span>
     </div>
   )
 }
