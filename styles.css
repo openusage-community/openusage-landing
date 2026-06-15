@@ -88,19 +88,19 @@
         .theme-dark .theme-toggle, .theme-dark .nav .mini-cta, .theme-dark .secondary, .theme-dark .menu-toggle { background: rgba(12,32,69,.78); }
         .theme-dark .theme-toggle .dot { background: #EAF2FF; box-shadow: inset -7px -3px 0 #1463FF; }
 
-        .hero { width: var(--content-width); margin: 0 auto; padding: calc(74px * var(--density)) 0 88px; min-height: calc(100vh - 88px); display: grid; grid-template-columns: minmax(0, 1.03fr) minmax(360px, .97fr); gap: clamp(34px, 6vw, 86px); align-items: center; }
+        .hero { width: var(--content-width); margin: 0 auto; padding: clamp(34px, 5vh, 64px) 0 clamp(42px, 6vh, 72px); min-height: calc(100vh - 104px); display: grid; grid-template-columns: minmax(0, 1.03fr) minmax(360px, .97fr); gap: clamp(30px, 5vw, 76px); align-items: center; }
         .eyebrow { display: inline-flex; gap: 10px; align-items: center; padding: 9px 13px; border: 1px solid var(--line); border-radius: 999px; color: #315682; background: rgba(255,255,255,.72); box-shadow: 0 14px 45px rgba(20,99,255,.07); font-size: .9rem; font-weight: 700; }
         .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-blue); box-shadow: 0 0 0 7px rgba(20,99,255,.12); }
         h1, h2, h3 { margin: 0; color: var(--ink-blue); }
-        h1 { margin-top: 24px; max-width: 790px; font-family: 'Charter', Georgia, serif; font-size: clamp(3.5rem, 8vw, 7.7rem); line-height: .86; letter-spacing: -.075em; font-weight: 700; }
+        h1 { margin-top: 18px; max-width: 820px; font-family: 'Charter', Georgia, serif; font-size: clamp(3.25rem, 5.4vw, 6.2rem); line-height: .9; letter-spacing: -.065em; font-weight: 700; }
         .tagline { display: block; color: var(--accent-blue); font-style: italic; letter-spacing: -.07em; }
-        .subhead { max-width: 660px; margin: 28px 0 0; color: #41587D; font-size: clamp(1.08rem, 1.5vw, 1.35rem); line-height: 1.65; }
-        .actions { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; }
+        .subhead { max-width: 660px; margin: 22px 0 0; color: #41587D; font-size: clamp(1.04rem, 1.32vw, 1.24rem); line-height: 1.58; }
+        .actions { margin-top: 28px; display: flex; gap: 14px; flex-wrap: wrap; }
         .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 22px; border-radius: 999px; border: 1px solid transparent; font-weight: 800; transition: transform .2s ease, box-shadow .2s ease, background .2s ease; cursor: pointer; }
         .btn:hover { transform: translateY(-2px); }
         .primary { background: var(--accent-blue); color: white; box-shadow: 0 20px 46px rgba(20,99,255,.28); }
         .secondary { background: rgba(255,255,255,.78); color: var(--ink-blue); border-color: rgba(20,99,255,.2); }
-        .trust-line { margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; color: var(--muted); font-size: .94rem; }
+        .trust-line { margin-top: 24px; display: flex; gap: 14px; flex-wrap: wrap; color: var(--muted); font-size: .94rem; }
         .trust-line span { padding: 8px 12px; border-radius: 999px; background: rgba(234,242,255,.78); }
         .visual { position: relative; min-height: 570px; display: grid; place-items: center; }
         .visual::before { content: ""; position: absolute; width: 83%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(20,99,255,.2), transparent 64%); filter: blur(8px); }
@@ -191,9 +191,17 @@
           .feature:nth-child(1) { grid-row: auto; }
           .faq-grid { grid-template-columns: 1fr; }
         }
+        @media (min-width: 901px) and (max-height: 820px) {
+          .hero { padding-top: 26px; padding-bottom: 44px; }
+          h1 { margin-top: 14px; font-size: clamp(3rem, 4.7vw, 5.3rem); line-height: .91; }
+          .subhead { margin-top: 18px; font-size: 1.02rem; line-height: 1.5; }
+          .actions { margin-top: 22px; }
+          .trust-line { margin-top: 18px; }
+          .trust-line span { padding: 7px 11px; }
+        }
         @media (max-width: 560px) {
           .nav, .hero, section, footer { width: min(100% - 28px, 1160px); }
-          h1 { font-size: clamp(3rem, 17vw, 4.7rem); }
+          h1 { font-size: clamp(2.75rem, 14vw, 3.65rem); }
           .actions, footer { align-items: stretch; flex-direction: column; }
           .btn { width: 100%; }
           .usage-card { padding: 16px; border-radius: 26px; }

@@ -15,7 +15,7 @@
 }
 
 .preview-shell {
-  height: 560px;
+  height: clamp(460px, 58vh, 560px);
   display: grid;
   grid-template-columns: 54px minmax(0, 1fr);
   overflow: hidden;
@@ -355,6 +355,12 @@
 
   .preview-shell {
     height: 520px;
+  }
+}
+
+@media (min-width: 901px) and (max-height: 820px) {
+  .preview-shell {
+    height: 460px;
   }
 }
 
