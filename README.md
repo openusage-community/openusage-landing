@@ -9,6 +9,8 @@
   </p>
 
   <p>
+    <a href="https://openusage-community.github.io/openusage-landing/">Live site</a>
+    ·
     <a href="https://github.com/openusage-community/openusage">OpenUsage app</a>
     ·
     <a href="https://github.com/robinebers/openusage">Original project</a>
@@ -58,6 +60,7 @@ npm run build
 ## Repository Links
 
 - Landing page repo: https://github.com/openusage-community/openusage-landing
+- Live site: https://openusage-community.github.io/openusage-landing/
 - OpenUsage Community app: https://github.com/openusage-community/openusage
 - Original OpenUsage project: https://github.com/robinebers/openusage
 - Original author: https://github.com/robinebers
