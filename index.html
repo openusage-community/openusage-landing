@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="OpenUsage is a free open-source desktop app for tracking AI tool usage, cost, renewals, and outcomes.">
+<title>OpenUsage - AI usage ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&amp;family=DM+Serif+Display:ital@0;1&amp;family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<script src="./script.js" defer></script>
+</head>
+<body>
+    <main class="theme-light"><div class="page">
+<nav class="nav" aria-label="Primary navigation"><div class="logo" aria-label="OpenUsage">
+<img src="references/logo1-2.png" alt="OpenUsage logo"><span>openusage</span>
+</div>
+<button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="primary-menu"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></button><div id="primary-menu" class="nav-links">
+<a href="#features">Features</a><a href="#platforms">Platforms</a><a href="#proof">Proof</a><a href="#faq">FAQ</a><a class="mini-cta" href="#pricing">Download</a><button class="theme-toggle" type="button" aria-pressed="false"><span class="dot" aria-hidden="true"></span><span>Dark</span></button>
+</div></nav><header class="hero"><div class="hero-copy">
+<h1>Know which AI tools are worth keeping. <span class="tagline">Stop guessing.</span>
+</h1>
+<p class="subhead">OpenUsage is a private command center for individuals using ChatGPT, Claude, Cursor, image models, and niche assistants. Track cost, time saved, renewals, and outcomes in one blue notebook for your AI life.</p>
+<div class="actions">
+<a class="btn primary" href="#pricing">Download for free</a><a class="btn secondary" href="https://github.com/openusage/openusage" aria-label="Open OpenUsage on GitHub"><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="margin-right: 8px;"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.76-.24.76-.54v-2.1c-3.1.67-3.76-1.33-3.76-1.33-.5-1.29-1.24-1.63-1.24-1.63-1.02-.7.08-.69.08-.69 1.12.08 1.71 1.15 1.71 1.15 1 .1.92 2.43 3.16 1.72.1-.72.39-1.22.71-1.5-2.48-.28-5.09-1.24-5.09-5.53 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.08 1.15.9-.25 1.85-.38 2.8-.38.95 0 1.9.13 2.8.38 2.14-1.45 3.08-1.15 3.08-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.3-2.62 5.24-5.11 5.52.4.34.76 1.02.76 2.06v3.05c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z"></path></svg>Github</a>
+</div>
+<div class="trust-line" aria-label="Product highlights">
+<span>No external screenshots</span><span>Metadata-first privacy</span><span>Exports included</span>
+</div>
+</div>
+<div class="visual"><div class="usage-card" aria-label="OpenUsage product preview">
+<div class="card-topline">
+<span>Today&rsquo;s AI ledger</span><strong>$8.99</strong>
+</div>
+<div class="pulse-row">
+<div>
+<b>6h 20m</b><span>time assisted</span>
+</div>
+<div>
+<b>12</b><span>useful outputs</span>
+</div>
+<div>
+<b>3</b><span>renewals watched</span>
+</div>
+</div>
+<div class="chart" aria-hidden="true">
+<i style="height: 44%;"></i><i style="height: 71%;"></i><i style="height: 38%;"></i><i style="height: 92%;"></i><i style="height: 56%;"></i><i style="height: 80%;"></i><i style="height: 63%;"></i>
+</div>
+<div class="ledger">
+<div class="ledger-row">
+<span>Research</span><span>Claude</span><span>$2.18</span><em>High value</em>
+</div>
+<div class="ledger-row">
+<span>Writing</span><span>ChatGPT</span><span>$0.84</span><em>Draft saved</em>
+</div>
+<div class="ledger-row">
+<span>Images</span><span>Runway</span><span>$4.60</span><em>Review</em>
+</div>
+<div class="ledger-row">
+<span>Coding</span><span>Cursor</span><span>$1.37</span><em>Shipped</em>
+</div>
+</div>
+</div></div></header><section id="features" aria-labelledby="features-title"><div class="section-head">
+<h2 id="features-title">A ledger for the AI you actually use.</h2>
+<p>Inspired by focused productivity tools, OpenUsage keeps the interface practical: one timeline, clear signals, no performative dashboards. Every entry answers: what did I use, what did it cost, and did it help?</p>
+</div>
+<div class="features">
+<article class="feature"><span class="kicker">Capture</span><h3>Log usage as you work</h3>
+<p>OpenUsage watches prompts, model calls, and subscription activity across your AI tools, then turns scattered activity into one calm daily ledger.</p>
+<small>Browser, desktop, and manual entries</small></article><article class="feature"><span class="kicker">Understand</span><h3>See what actually helped</h3>
+<p>Tag sessions by project, outcome, or mood. The timeline reveals which tools saved time, which created rework, and where your best ideas started.</p>
+<small>Project notes, outcomes, and time saved</small></article><article class="feature"><span class="kicker">Control</span><h3>Set personal AI budgets</h3>
+<p>Know when a free trial is about to renew, when token spend is creeping up, or when a cheaper workflow could do the same job.</p>
+<small>Renewal alerts and monthly caps</small></article><article class="feature"><span class="kicker">Export</span><h3>Own your usage history</h3>
+<p>Download clean CSV or Markdown summaries for taxes, client recaps, research journals, or simply remembering what worked last month.</p>
+<small>Portable history, no lock-in</small></article>
+</div></section><section id="platforms" aria-labelledby="platforms-title"><div class="section-head">
+<h2 id="platforms-title">Supported operating systems.</h2>
+<p>OpenUsage is designed as a desktop companion for personal AI work. Start on Linux or macOS today, with Windows support coming soon.</p>
+</div>
+<div class="platforms" aria-label="Supported operating systems">
+<article class="platform-card"><img class="platform-logo platform-logo-linux" src="references/linux-tux-svgrepo-com.svg" alt="" aria-hidden="true"><span class="platform-status">Available now</span><h3>Linux</h3>
+<p>A focused desktop build for personal AI ledgers on Ubuntu, Fedora, Arch, and other modern distributions.</p></article><article class="platform-card"><img class="platform-logo platform-logo-macos" src="references/apple-173-svgrepo-com-2.svg" alt="" aria-hidden="true"><span class="platform-status">Available now</span><h3>macOS</h3>
+<p>Native-feeling tracking for Mac workflows across research, writing, coding, and creative AI tools.</p></article><article class="platform-card coming"><img class="platform-logo platform-logo-windows" src="references/windows-logo.svg" alt="" aria-hidden="true"><span class="platform-status">Coming soon</span><h3>Windows</h3>
+<p>A Windows build is on the roadmap so the same free, open-source ledger can follow every desktop workflow.</p></article>
+</div></section><section id="proof" aria-labelledby="proof-title"><div class="proof-band">
+<div>
+<h2 id="proof-title" style="color: white;">Built for people, not procurement.</h2>
+<blockquote>&ldquo;I stopped paying for tools that only felt productive. OpenUsage showed me which AI sessions became finished work.&rdquo;</blockquote>
+<cite>&mdash; Mira, freelance researcher in the private beta</cite>
+</div>
+<div class="proof-stats">
+<div>
+<b>14,800+</b><span>personal AI sessions organized in the private beta</span>
+</div>
+<div>
+<b>31%</b><span>average reduction in forgotten subscription spend</span>
+</div>
+<div>
+<b>4.8/5</b><span>clarity rating from solo builders and students</span>
+</div>
+</div>
+</div></section><section id="pricing" aria-labelledby="pricing-title"><div class="pricing">
+<div class="price-copy">
+<span class="kicker">Free and open source</span><h2 id="pricing-title">Use OpenUsage for free. Keep the code in the open.</h2>
+<p class="subhead" style="margin-top: 20px;">OpenUsage is not another subscription to justify. The app is completely free and open source, so individuals can inspect how their AI usage ledger works, run it on their own terms, and contribute improvements back.</p>
+<div class="open-note" aria-label="Open source principles">
+<span>Free to use</span><span>Source available</span><span>No paid tier teaser</span>
+</div>
+</div>
+<div class="price-card">
+<span class="eyebrow">Open access</span><div class="price">
+<strong>$0</strong><span>open source forever</span>
+</div>
+<ul class="checks">
+<li>Track your AI tools and keep a personal usage history</li>
+<li>Renewal reminders and monthly spend summaries</li>
+<li>Review the source before trusting it with your workflow</li>
+<li>Export clean records without an upgrade prompt</li>
+</ul>
+<a class="btn primary" href="https://github.com/openusage/openusage">View the open-source project</a>
+</div>
+</div></section><section id="faq" aria-labelledby="faq-title"><div class="section-head">
+<h2 id="faq-title">Questions before you open the ledger?</h2>
+<p>OpenUsage is intentionally narrow: better awareness for individuals, without turning your personal AI habits into enterprise software.</p>
+</div>
+<div class="faq-grid">
+<details><summary>Is OpenUsage another AI chat app?</summary><p>No. It is the personal usage layer for the AI tools you already use. The point is to reveal cost, value, and patterns across your existing workflow.</p></details><details><summary>Do I need to connect every account?</summary><p>You can start with manual entries and browser capture. Deeper integrations are optional, and exports remain available regardless of plan.</p></details><details><summary>Who is this for?</summary><p>Individuals who use several AI products: freelancers, students, creators, researchers, and operators who want a clearer view of what is worth keeping.</p></details><details><summary>How private is the ledger?</summary><p>OpenUsage is designed around metadata first: tool, time, cost, tags, and outcome. Sensitive prompt text can be excluded or stored locally in future desktop mode.</p></details>
+</div></section><footer><div class="logo" aria-label="OpenUsage">
+<img src="references/logo1-2.png" alt="OpenUsage logo"><span>openusage</span>
+</div>
+<div class="footer-links" aria-label="Footer links">
+<a href="#features">Features</a><a href="mailto:peterbaikov12@proton.me">Contact</a>
+</div>
+<span>&copy; 2026 OpenUsage. Own your AI footprint.</span></footer>
+</div></main>
+</body>
+</html>
