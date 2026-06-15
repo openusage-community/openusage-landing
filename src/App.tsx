@@ -264,14 +264,14 @@ export default function App() {
         <section id="proof" aria-labelledby="proof-title">
           <div className="proof-band">
             <div>
-              <h2 id="proof-title" style={{ color: "white" }}>Built for people, not procurement.</h2>
-              <blockquote>“I stopped paying for tools that only felt productive. OpenUsage showed me which AI sessions became finished work.”</blockquote>
-              <cite>— Mira, freelance researcher</cite>
+              <h2 id="proof-title" style={{ color: "white" }}>OpenUsage Community is built in the open.</h2>
+              <blockquote>Track the AI providers you already use, keep Linux support first-class, and own a desktop ledger that stays free to inspect, run, and improve.</blockquote>
             </div>
             <div className="proof-stats">
-              <div><b>14,800+</b><span>personal AI sessions organized across active users</span></div>
-              <div><b>31%</b><span>average reduction in forgotten subscription spend</span></div>
-              <div><b>4.8/5</b><span>clarity rating from solo builders and students</span></div>
+              <div><b>15+</b><span>providers supported across chat, coding, search, and creative AI tools</span></div>
+              <div><b>Linux</b><span>first-class builds for AppImage, deb, and rpm workflows</span></div>
+              <div><b>MIT</b><span>licensed so the code stays simple to inspect, fork, and reuse</span></div>
+              <div><b>Open</b><span>source project with community-maintained releases and contributions</span></div>
             </div>
           </div>
         </section>
