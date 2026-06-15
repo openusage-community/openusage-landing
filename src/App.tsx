@@ -262,6 +262,23 @@ export default function App() {
           </div>
         </section>
 
+        <section id="origin" aria-labelledby="origin-title">
+          <div className="origin-story">
+            <div>
+              <span className="kicker">Project origin</span>
+              <h2 id="origin-title">Built on the original OpenUsage.</h2>
+            </div>
+            <div className="origin-copy">
+              <p>OpenUsage Community is an independent, community-maintained continuation of the original OpenUsage project by Robin Ebers.</p>
+              <p>This fork keeps the cross-platform Tauri direction alive, with stronger focus on Linux releases, working macOS builds, and provider contributions from the community.</p>
+              <div className="origin-links" aria-label="Original project links">
+                <a className="btn secondary" href="https://github.com/robinebers/openusage">Original OpenUsage</a>
+                <a className="btn secondary" href="https://github.com/robinebers">Robin Ebers</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <footer>
           <LogoMark />
           <div className="footer-links" aria-label="Footer links">

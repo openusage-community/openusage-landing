@@ -166,6 +166,12 @@
         details { border: 1px solid rgba(20,99,255,.14); border-radius: 22px; background: rgba(255,255,255,.72); padding: 20px 22px; }
         summary { cursor: pointer; color: var(--ink-blue); font-weight: 900; font-size: 1.05rem; }
         details p { color: #53698D; line-height: 1.65; margin-bottom: 0; }
+        .origin-story { border: 1px solid rgba(20,99,255,.15); border-radius: 34px; padding: clamp(26px, 4vw, 46px); background: linear-gradient(145deg, rgba(255,255,255,.82), rgba(232,242,255,.72)); display: grid; grid-template-columns: .9fr 1.1fr; gap: 32px; align-items: start; box-shadow: 0 26px 70px rgba(15,53,118,.09); }
+        .origin-copy { display: grid; gap: 18px; }
+        .origin-copy p { margin: 0; color: #53698D; font-size: 1.05rem; line-height: 1.7; }
+        .origin-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px; }
+        .theme-dark .origin-story { background: linear-gradient(145deg, rgba(12,32,69,.76), rgba(10,29,64,.62)); border-color: rgba(137,184,255,.2); box-shadow: 0 24px 70px rgba(0,8,24,.26); }
+        .theme-dark .origin-copy p { color: #BFD0EC; }
         footer { width: min(1160px, calc(100% - 40px)); margin: 0 auto; padding: 46px 0 54px; border-top: 1px solid rgba(20,99,255,.15); display: flex; align-items: center; justify-content: space-between; gap: 20px; color: #647592; }
         .footer-links { display: flex; gap: 18px; flex-wrap: wrap; }
         :focus-visible { outline: 3px solid rgba(20,99,255,.55); outline-offset: 4px; border-radius: 12px; }
@@ -177,7 +183,7 @@
           .nav-links a, .nav .mini-cta, .nav-links .theme-toggle { width: 100%; justify-content: center; padding: 12px 14px; border-radius: 16px; }
           .nav-links a { border-bottom: 0; }
           .theme-dark .nav-links { background: rgba(8,24,54,.94); border-color: rgba(137,184,255,.22); }
-          .hero, .section-head, .features, .proof-band, .pricing { grid-template-columns: 1fr; }
+          .hero, .section-head, .features, .proof-band, .pricing, .origin-story { grid-template-columns: 1fr; }
             .platforms { grid-template-columns: 1fr; }
           .hero { padding-top: 40px; min-height: auto; }
           .visual { min-height: auto; }
