@@ -154,7 +154,7 @@ export default function App() {
             <p className="subhead">OpenUsage is a private command center for individuals using ChatGPT, Claude, Cursor, image models, and niche assistants. Track cost, time saved, renewals, and outcomes in one blue notebook for your AI life.</p>
             <div className="actions">
               <a className="btn primary" href="#pricing">Download for free</a>
-              <a className="btn secondary" href="https://github.com/openusage/openusage" aria-label="Open OpenUsage on GitHub"><GithubIcon />Github</a>
+              <a className="btn secondary" href="https://github.com/openusage-community/openusage" aria-label="Open OpenUsage on GitHub"><GithubIcon />Github</a>
             </div>
             <div className="trust-line" aria-label="Product highlights">
               <span>Live app preview</span>
@@ -247,7 +247,7 @@ export default function App() {
                 <li>Review the source before trusting it with your workflow</li>
                 <li>Export clean records without an upgrade prompt</li>
               </ul>
-              <a className="btn primary" href="https://github.com/openusage/openusage">View the open-source project</a>
+              <a className="btn primary" href="https://github.com/openusage-community/openusage">View the open-source project</a>
             </div>
           </div>
         </section>
