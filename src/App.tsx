@@ -216,10 +216,10 @@ export default function App() {
             <div>
               <h2 id="proof-title" style={{ color: "white" }}>Built for people, not procurement.</h2>
               <blockquote>“I stopped paying for tools that only felt productive. OpenUsage showed me which AI sessions became finished work.”</blockquote>
-              <cite>— Mira, freelance researcher in the private beta</cite>
+              <cite>— Mira, freelance researcher</cite>
             </div>
             <div className="proof-stats">
-              <div><b>14,800+</b><span>personal AI sessions organized in the private beta</span></div>
+              <div><b>14,800+</b><span>personal AI sessions organized across active users</span></div>
               <div><b>31%</b><span>average reduction in forgotten subscription spend</span></div>
               <div><b>4.8/5</b><span>clarity rating from solo builders and students</span></div>
             </div>
