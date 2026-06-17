@@ -51,6 +51,12 @@ test("hero preview follows the landing theme like the real OpenUsage panel", asy
   assert.doesNotMatch(sideNav, /isDark\s*$/m)
 })
 
+test("hero preview app window has no outer border", async () => {
+  const previewShell = await readFile(new URL("../src/openusage-preview/OpenUsagePreviewShell.tsx", import.meta.url), "utf8")
+
+  assert.doesNotMatch(previewShell, /preview-panel[^"]*\bborder\b/)
+})
+
 test("desktop navbar items share the same larger sizing tokens", async () => {
   const styles = await readFile(new URL("../styles.css", import.meta.url), "utf8")
 

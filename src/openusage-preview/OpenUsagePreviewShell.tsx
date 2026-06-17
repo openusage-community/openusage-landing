@@ -175,7 +175,7 @@ export function OpenUsagePreviewShell({
         className="flex flex-col items-center p-6 pt-1.5 bg-transparent outline-none"
       >
         <div className="tray-arrow" />
-        <div className="relative bg-card rounded-xl overflow-hidden select-none w-full border shadow-lg flex flex-col preview-panel">
+        <div className="relative bg-card rounded-xl overflow-hidden select-none w-full shadow-lg flex flex-col preview-panel">
           <div className="flex flex-1 min-h-0 flex-row">
             <SideNav
               activeView={activeView}
