@@ -1,4 +1,5 @@
 import { type MouseEvent, useEffect, useState } from "react"
+import { Download } from "lucide-react"
 import { AppPreview } from "./AppPreview"
 import {
   type DownloadPlatform,
@@ -61,18 +62,18 @@ function setHashWithoutScrollJump(sectionId: string) {
   window.scrollTo(currentX, currentY)
 }
 
-function LogoMark() {
+function LogoMark({ onClick }: { onClick?: (event: MouseEvent<HTMLAnchorElement>) => void }) {
   return (
-    <div className="logo" aria-label="OpenUsage">
+    <a className="logo" href="#top" aria-label="OpenUsage home" onClick={onClick}>
       <img src={`${assetBaseUrl}references/logo1-2.png`} alt="OpenUsage logo" />
       <span>OpenUsage Community</span>
-    </div>
+    </a>
   )
 }
 
 function GithubIcon() {
   return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style={{ marginRight: 8 }}>
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
       <path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.76-.24.76-.54v-2.1c-3.1.67-3.76-1.33-3.76-1.33-.5-1.29-1.24-1.63-1.24-1.63-1.02-.7.08-.69.08-.69 1.12.08 1.71 1.15 1.71 1.15 1 .1.92 2.43 3.16 1.72.1-.72.39-1.22.71-1.5-2.48-.28-5.09-1.24-5.09-5.53 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.08 1.15.9-.25 1.85-.38 2.8-.38.95 0 1.9.13 2.8.38 2.14-1.45 3.08-1.15 3.08-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.3-2.62 5.24-5.11 5.52.4.34.76 1.02.76 2.06v3.05c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z" />
     </svg>
   )
@@ -211,31 +212,35 @@ export default function App() {
     <main className={isDark ? "theme-dark" : "theme-light"}>
       <div className="page">
         <nav className="nav" aria-label="Primary navigation">
-          <LogoMark />
+          <LogoMark onClick={(event) => handleSectionLinkClick(event, "top")} />
           <button className="menu-toggle" type="button" aria-label={isMenuOpen ? "Close menu" : "Open menu"} aria-expanded={isMenuOpen} aria-controls="primary-menu" onClick={() => setIsMenuOpen((current) => !current)}>
             <span aria-hidden="true" />
             <span aria-hidden="true" />
             <span aria-hidden="true" />
           </button>
           <div id="primary-menu" className={isMenuOpen ? "nav-links is-open" : "nav-links"}>
-            <a href="#features" onClick={(event) => handleSectionLinkClick(event, "features")}>Features</a>
-            <a href="#platforms" onClick={(event) => handleSectionLinkClick(event, "platforms")}>Platforms</a>
-            <a href="#proof" onClick={(event) => handleSectionLinkClick(event, "proof")}>Proof</a>
-            <a href="#faq" onClick={(event) => handleSectionLinkClick(event, "faq")}>FAQ</a>
-            <a className="mini-cta" href="#platforms" onClick={(event) => handleSectionLinkClick(event, "platforms")}>Download</a>
-            <button className="theme-toggle" type="button" aria-pressed={isDark} onClick={() => setIsDark((current) => !current)}>
-              <span className="dot" aria-hidden="true" />
-              <span>{isDark ? "Light" : "Dark"}</span>
-            </button>
+            <div className="nav-link-group">
+              <a href="#features" onClick={(event) => handleSectionLinkClick(event, "features")}>Features</a>
+              <a href="#platforms" onClick={(event) => handleSectionLinkClick(event, "platforms")}>Platforms</a>
+              <a href="#proof" onClick={(event) => handleSectionLinkClick(event, "proof")}>Proof</a>
+              <a href="#faq" onClick={(event) => handleSectionLinkClick(event, "faq")}>FAQ</a>
+            </div>
+            <div className="nav-actions">
+              <a className="mini-cta" href="#platforms" onClick={(event) => handleSectionLinkClick(event, "platforms")}>Download</a>
+              <button className="theme-toggle" type="button" aria-pressed={isDark} onClick={() => setIsDark((current) => !current)}>
+                <span className="dot" aria-hidden="true" />
+                <span>{isDark ? "Light" : "Dark"}</span>
+              </button>
+            </div>
           </div>
         </nav>
 
-        <header className="hero">
+        <header id="top" className="hero">
           <div className="hero-copy">
             <h1>Know which AI tools are worth keeping. <span className="tagline">Stop guessing.</span></h1>
             <p className="subhead">OpenUsage is a private command center for individuals using ChatGPT, Claude, Cursor, image models, and niche assistants. Track cost, time saved, renewals, and outcomes in one blue notebook for your AI life.</p>
             <div className="actions">
-              <a className="btn primary" href="#platforms" onClick={(event) => handleSectionLinkClick(event, "platforms")}>Download for free</a>
+              <a className="btn primary" href="#platforms" onClick={(event) => handleSectionLinkClick(event, "platforms")}>Download for free<Download aria-hidden="true" size={19} strokeWidth={2.4} /></a>
               <a className="btn secondary" href="https://github.com/openusage-community/openusage" aria-label="Open OpenUsage on GitHub"><GithubIcon />Github</a>
             </div>
             <div className="trust-line" aria-label="Product highlights">
@@ -245,7 +250,7 @@ export default function App() {
             </div>
           </div>
           <div className="visual">
-            <AppPreview releaseTag={release?.tag} />
+            <AppPreview releaseTag={release?.tag} themeMode={isDark ? "dark" : "light"} />
           </div>
         </header>
 
@@ -362,7 +367,7 @@ export default function App() {
         </section>
 
         <footer>
-          <LogoMark />
+          <LogoMark onClick={(event) => handleSectionLinkClick(event, "top")} />
           <div className="footer-links" aria-label="Footer links">
             <a href="#features" onClick={(event) => handleSectionLinkClick(event, "features")}>Features</a>
             <a href="mailto:peterbaikov12@proton.me">Contact</a>
