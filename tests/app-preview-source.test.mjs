@@ -57,6 +57,21 @@ test("hero preview app window has no outer border", async () => {
   assert.doesNotMatch(previewShell, /preview-panel[^"]*\bborder\b/)
 })
 
+test("landing renders community article previews from generated data", async () => {
+  const app = await readFile(new URL("../src/App.tsx", import.meta.url), "utf8")
+  const styles = await readFile(new URL("../styles.css", import.meta.url), "utf8")
+
+  assert.match(app, /communityArticlePreviews/)
+  assert.match(app, /From the community/)
+  assert.match(app, /<section id="community"/)
+  assert.match(app, /target="_blank"/)
+  assert.match(app, /rel="noopener noreferrer"/)
+  assert.match(app, /communityArticlePreviews\.length === 1 \? "community-grid is-single" : "community-grid"/)
+  assert.match(styles, /\.community-grid/)
+  assert.match(styles, /\.community-grid\.is-single/)
+  assert.match(styles, /\.community-card/)
+})
+
 test("desktop navbar items share the same larger sizing tokens", async () => {
   const styles = await readFile(new URL("../styles.css", import.meta.url), "utf8")
 
