@@ -1,6 +1,7 @@
 import { type MouseEvent, useEffect, useState } from "react"
-import { Download } from "lucide-react"
+import { Download, ExternalLink } from "lucide-react"
 import { AppPreview } from "./AppPreview"
+import communityArticlePreviewData from "./generated/community-article-previews.json"
 import {
   type DownloadPlatform,
   type ReleaseDownloadOptions,
@@ -9,6 +10,16 @@ import {
 
 const assetBaseUrl = import.meta.env.BASE_URL
 const releasesUrl = "https://github.com/openusage-community/openusage/releases"
+type CommunityArticlePreview = {
+  url: string
+  title: string
+  description?: string
+  image?: string
+  source?: string
+  publishedAt?: string
+}
+
+const communityArticlePreviews = communityArticlePreviewData as CommunityArticlePreview[]
 
 const features = [
   ["Capture", "Log usage as you work", "OpenUsage watches prompts, model calls, and subscription activity across your AI tools, then turns scattered activity into one calm daily ledger.", "Browser, desktop, and manual entries"],
@@ -81,6 +92,71 @@ function GithubIcon() {
 
 function PlatformLogo({ file, className }: { file: string; className: string }) {
   return <img className={`platform-logo ${className}`} src={`${assetBaseUrl}references/${file}`} alt="" aria-hidden="true" />
+}
+
+function formatArticleDate(value?: string) {
+  if (!value) {
+    return ""
+  }
+
+  const date = new Date(value)
+  if (Number.isNaN(date.getTime())) {
+    return value
+  }
+
+  return new Intl.DateTimeFormat("en", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(date)
+}
+
+function CommunityArticleCard({ article }: { article: CommunityArticlePreview }) {
+  const articleDate = formatArticleDate(article.publishedAt)
+
+  return (
+    <a className="community-card" href={article.url} target="_blank" rel="noopener noreferrer">
+      {article.image ? (
+        <span className="community-card-media">
+          <img src={article.image} alt="" loading="lazy" />
+        </span>
+      ) : (
+        <span className="community-card-media is-empty" aria-hidden="true" />
+      )}
+      <span className="community-card-body">
+        <span className="community-card-meta">
+          {article.source ? <span>{article.source}</span> : null}
+          {articleDate ? <time dateTime={article.publishedAt}>{articleDate}</time> : null}
+        </span>
+        <strong>{article.title}</strong>
+        {article.description ? <span className="community-card-description">{article.description}</span> : null}
+        <span className="community-card-link">
+          Read article
+          <ExternalLink aria-hidden="true" size={16} strokeWidth={2.4} />
+        </span>
+      </span>
+    </a>
+  )
+}
+
+function CommunitySection() {
+  if (communityArticlePreviews.length === 0) {
+    return null
+  }
+
+  return (
+    <section id="community" aria-labelledby="community-title">
+      <div className="section-head">
+        <h2 id="community-title">From the community</h2>
+        <p>Articles, walkthroughs, and reviews from people using OpenUsage in real AI workflows.</p>
+      </div>
+      <div className={communityArticlePreviews.length === 1 ? "community-grid is-single" : "community-grid"}>
+        {communityArticlePreviews.map((article) => (
+          <CommunityArticleCard article={article} key={article.url} />
+        ))}
+      </div>
+    </section>
+  )
 }
 
 function DownloadModal({
@@ -312,6 +388,8 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        <CommunitySection />
 
         <section id="pricing" aria-labelledby="pricing-title">
           <div className="pricing">
