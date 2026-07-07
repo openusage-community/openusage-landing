@@ -282,6 +282,19 @@ export default function App() {
     }
   }, [])
 
+  useEffect(() => {
+    if (!downloadPlatform) {
+      return
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [downloadPlatform])
+
   function refreshLatestRelease({ clearRelease = false } = {}) {
     if (clearRelease) {
       setRelease(null)

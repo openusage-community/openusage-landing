@@ -20,20 +20,26 @@
   inset: 0;
   z-index: 50;
   display: grid;
-  place-items: center;
+  align-items: start;
+  justify-items: center;
   padding: 20px;
   background: rgba(3, 16, 39, .62);
   backdrop-filter: blur(14px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .download-modal {
   position: relative;
   width: min(100%, 620px);
+  max-height: calc(100dvh - 40px);
   padding: clamp(24px, 4vw, 36px);
   border: 1px solid rgba(137, 184, 255, .24);
   border-radius: 28px;
   background: var(--surface-strong);
   box-shadow: 0 34px 90px rgba(0, 8, 24, .38);
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .download-modal h2 {
@@ -48,9 +54,11 @@
 }
 
 .download-modal-close {
-  position: absolute;
+  position: sticky;
+  z-index: 1;
   top: 18px;
-  right: 18px;
+  float: right;
+  margin: -6px -6px 0 16px;
   width: 42px;
   height: 42px;
   border: 1px solid var(--line);
