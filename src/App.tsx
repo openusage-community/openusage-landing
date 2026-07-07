@@ -10,6 +10,11 @@ import {
 
 const assetBaseUrl = import.meta.env.BASE_URL
 const releasesUrl = "https://github.com/openusage-community/openusage/releases"
+const homebrewUrl = "https://brew.sh/"
+const macosInstallCommands = [
+  "brew tap openusage-community/openusage https://github.com/openusage-community/openusage.git",
+  "brew install --cask openusage-community/openusage/openusage",
+]
 type CommunityArticlePreview = {
   url: string
   title: string
@@ -171,16 +176,42 @@ function DownloadModal({
   onClose: () => void
 }) {
   const config = release?.options[platform]
+  const isMacOs = platform === "macos"
   const title = platform === "linux" ? "Download OpenUsage for Linux" : "Download OpenUsage for macOS"
+  const modalTitle = isMacOs ? title : config?.title ?? title
+  const modalIntro = isMacOs
+    ? "Install OpenUsage with Homebrew. The same cask works for Apple Silicon and Intel Macs."
+    : config?.intro ?? "Fetching the newest release from GitHub."
+  const modalKicker = isMacOs ? "macOS Homebrew install" : release ? `Latest release ${release.tag}` : "Loading latest release"
 
   return (
     <div className="download-modal-backdrop" role="presentation" onClick={onClose}>
       <section className="download-modal" role="dialog" aria-modal="true" aria-labelledby="download-modal-title" onClick={(event) => event.stopPropagation()}>
         <button className="download-modal-close" type="button" aria-label="Close download options" onClick={onClose}>×</button>
-        <span className="kicker">{release ? `Latest release ${release.tag}` : "Loading latest release"}</span>
-        <h2 id="download-modal-title">{config?.title ?? title}</h2>
-        <p>{config?.intro ?? "Fetching the newest release from GitHub."}</p>
-        {!release && !releaseError ? (
+        <span className="kicker">{modalKicker}</span>
+        <h2 id="download-modal-title">{modalTitle}</h2>
+        <p>{modalIntro}</p>
+        {isMacOs ? (
+          <div className="macos-install">
+            <div className="brew-callout">
+              <span>
+                <strong>Homebrew required</strong>
+                <small>Install Homebrew first if the <code>brew</code> command is not available on your Mac.</small>
+              </span>
+              <a href={homebrewUrl} target="_blank" rel="noreferrer">
+                Install Homebrew <ExternalLink size={16} strokeWidth={2.3} />
+              </a>
+            </div>
+            <ol className="install-steps">
+              {macosInstallCommands.map((command, index) => (
+                <li key={command}>
+                  <span>{index === 0 ? "Add the OpenUsage cask tap" : "Install OpenUsage"}</span>
+                  <code>{command}</code>
+                </li>
+              ))}
+            </ol>
+          </div>
+        ) : !release && !releaseError ? (
           <div className="download-options">
             <div className="download-option" aria-live="polite">
               <span>

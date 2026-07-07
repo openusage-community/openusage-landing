@@ -112,6 +112,105 @@
   text-align: right;
 }
 
+.macos-install {
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.brew-callout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(234, 242, 255, .62);
+}
+
+.brew-callout strong,
+.brew-callout small {
+  display: block;
+}
+
+.brew-callout strong {
+  color: var(--ink-blue);
+  font-size: 1.05rem;
+}
+
+.brew-callout small {
+  margin-top: 5px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.brew-callout code {
+  font-family: "JetBrains Mono", monospace;
+  font-size: .85em;
+}
+
+.brew-callout a {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-blue);
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.install-steps {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  counter-reset: install-step;
+  list-style: none;
+}
+
+.install-steps li {
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(234, 242, 255, .42);
+  counter-increment: install-step;
+}
+
+.install-steps li::before {
+  content: counter(install-step);
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: var(--accent-blue);
+  color: #fff;
+  font-family: "JetBrains Mono", monospace;
+  font-size: .78rem;
+  font-weight: 800;
+}
+
+.install-steps span {
+  color: var(--ink-blue);
+  font-weight: 800;
+}
+
+.install-steps code {
+  display: block;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(4, 20, 48, .08);
+  color: var(--ink-blue);
+  font-family: "JetBrains Mono", monospace;
+  font-size: .82rem;
+  line-height: 1.55;
+  overflow-x: auto;
+  white-space: pre;
+}
+
 .theme-dark .download-modal-close {
   background: rgba(12, 32, 69, .78);
   color: #F5F9FF;
@@ -127,6 +226,17 @@
   border-color: rgba(137, 184, 255, .36);
 }
 
+.theme-dark .brew-callout,
+.theme-dark .install-steps li {
+  background: rgba(234, 242, 255, .07);
+  border-color: rgba(137, 184, 255, .18);
+}
+
+.theme-dark .install-steps code {
+  background: rgba(3, 16, 39, .58);
+  color: #D9ECFF;
+}
+
 @media (max-width: 560px) {
   .download-option {
     grid-template-columns: 1fr;
@@ -135,5 +245,14 @@
   .download-option em {
     max-width: none;
     text-align: left;
+  }
+
+  .brew-callout {
+    grid-template-columns: 1fr;
+  }
+
+  .brew-callout a {
+    justify-content: flex-start;
+    white-space: normal;
   }
 }

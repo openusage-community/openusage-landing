@@ -71,11 +71,8 @@ export function buildReleaseDownloadOptions(release: GitHubRelease): ReleaseDown
       },
       macos: {
         title: "Download OpenUsage for macOS",
-        intro: "Choose the Mac chip type. The download starts immediately after selection.",
-        options: compactOptions([
-          toOption(findAsset(assets, (name) => name.endsWith("_aarch64.dmg")), "Apple Silicon", "For M1, M2, M3, and M4 Macs"),
-          toOption(findAsset(assets, (name) => name.endsWith("_x64.dmg")), "Intel Mac", "For older x64 Intel Macs"),
-        ]),
+        intro: "Install OpenUsage with Homebrew. The same cask works for Apple Silicon and Intel Macs.",
+        options: [],
       },
     },
   }
