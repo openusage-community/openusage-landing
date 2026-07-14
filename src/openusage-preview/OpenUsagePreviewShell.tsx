@@ -14,6 +14,8 @@ import type {
   TimeFormatMode,
 } from "@/lib/settings"
 
+const assetBaseUrl = import.meta.env.BASE_URL
+
 function toNavPlugin(plugin: PluginDisplayState): NavPlugin {
   return {
     id: plugin.meta.id,
@@ -172,8 +174,14 @@ export function OpenUsagePreviewShell({
     >
       <div
         tabIndex={-1}
-        className="flex flex-col items-center p-6 pt-1.5 bg-transparent outline-none"
+        className="app-preview-window flex flex-col items-center p-6 pt-1.5 bg-transparent outline-none"
       >
+        <img
+          className="app-preview-menubar"
+          src={`${assetBaseUrl}references/hero-menubar-screenshot.png`}
+          alt=""
+          aria-hidden="true"
+        />
         <div className="tray-arrow" />
         <div className="relative bg-card rounded-xl overflow-hidden select-none w-full shadow-lg flex flex-col preview-panel">
           <div className="flex flex-1 min-h-0 flex-row">
