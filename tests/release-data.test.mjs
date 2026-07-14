@@ -35,6 +35,9 @@ test("builds download options from latest GitHub release assets", () => {
       { name: "OpenUsage_0.7.0_amd64.deb", browser_download_url: "https://example.com/deb" },
       { name: "OpenUsage-0.7.0-1.x86_64.rpm", browser_download_url: "https://example.com/rpm" },
       { name: "OpenUsage_0.7.0_amd64.AppImage", browser_download_url: "https://example.com/appimage" },
+      { name: "OpenUsage_0.7.0_x64-setup.exe", browser_download_url: "https://example.com/windows-exe" },
+      { name: "OpenUsage_0.7.0_x64_en-US.msi", browser_download_url: "https://example.com/windows-msi" },
+      { name: "openusage_0.7.0_windows_amd64.zip", browser_download_url: "https://example.com/windows-zip" },
     ],
   })
 
@@ -46,6 +49,9 @@ test("builds download options from latest GitHub release assets", () => {
   assert.equal(release.options.macos.title, "Download OpenUsage for macOS")
   assert.match(release.options.macos.intro, /Homebrew/)
   assert.equal(release.options.macos.options.length, 0)
+  assert.equal(release.options.windows.options[0].href, "https://example.com/windows-exe")
+  assert.equal(release.options.windows.options[1].href, "https://example.com/windows-msi")
+  assert.equal(release.options.windows.options[2].href, "https://example.com/windows-zip")
 })
 
 test("omits missing package options instead of inventing URLs", () => {
@@ -58,6 +64,7 @@ test("omits missing package options instead of inventing URLs", () => {
 
   assert.equal(release.options.linux.options.length, 1)
   assert.equal(release.options.macos.options.length, 0)
+  assert.equal(release.options.windows.options.length, 0)
 })
 
 test("fetches latest release without browser cache", async () => {

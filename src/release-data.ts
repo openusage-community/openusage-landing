@@ -1,4 +1,4 @@
-export type DownloadPlatform = "linux" | "macos"
+export type DownloadPlatform = "linux" | "macos" | "windows"
 
 export type DownloadOption = {
   label: string
@@ -73,6 +73,15 @@ export function buildReleaseDownloadOptions(release: GitHubRelease): ReleaseDown
         title: "Download OpenUsage for macOS",
         intro: "Install OpenUsage with Homebrew. The same cask works for Apple Silicon and Intel Macs.",
         options: [],
+      },
+      windows: {
+        title: "Download OpenUsage for Windows",
+        intro: "Choose the installer that fits your Windows environment.",
+        options: compactOptions([
+          toOption(findAsset(assets, (name) => name.endsWith(".exe")), "Windows installer", "Recommended for most Windows PCs"),
+          toOption(findAsset(assets, (name) => name.endsWith(".msi")), "MSI installer", "Best for managed or enterprise Windows devices"),
+          toOption(findAsset(assets, (name) => name.endsWith("_windows_amd64.zip")), "Portable ZIP", "Run without installing"),
+        ]),
       },
     },
   }
