@@ -434,7 +434,7 @@ export default function App() {
         <section id="platforms" aria-labelledby="platforms-title">
           <div className="section-head">
             <h2 id="platforms-title">Supported operating systems.</h2>
-            <p>OpenUsage is designed as a desktop companion for personal AI work. Start on Linux or macOS today, with Windows support coming soon.</p>
+            <p>OpenUsage is designed as a desktop companion for personal AI work and is available for Linux, macOS, and Windows.</p>
           </div>
           <div className="platforms" aria-label="Supported operating systems">
             <button className="platform-card" type="button" onClick={() => openDownloadModal("linux")}>
