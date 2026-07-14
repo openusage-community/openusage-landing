@@ -52,6 +52,7 @@
         .theme-dark .proof-stats div { border-color: rgba(255,255,255,.14); background: rgba(255,255,255,.06); }
         .theme-dark .proof-stats b { color: #DDEBFF; }
         .theme-dark .proof-stats span { color: #AFC4E7; }
+        .theme-dark .provider-card { background: rgba(12,32,69,.72); border-color: rgba(137,184,255,.2); color: #F5F9FF; }
         .theme-dark .community-card { background: linear-gradient(145deg, rgba(12,32,69,.78), rgba(10,29,64,.62)); border-color: rgba(137,184,255,.2); box-shadow: 0 24px 70px rgba(0,8,24,.26); }
         .theme-dark .community-card:hover { border-color: rgba(137,184,255,.36); box-shadow: 0 30px 86px rgba(0,8,24,.34); }
         .theme-dark .community-card-media { background: linear-gradient(145deg, rgba(20,99,255,.26), rgba(121,183,255,.14)); }
@@ -156,6 +157,9 @@
         .feature h3 { margin-top: 18px; font-size: clamp(1.5rem, 2.2vw, 2.2rem); letter-spacing: -.04em; }
         .feature p { color: inherit; opacity: .76; line-height: 1.65; font-size: 1.02rem; }
         .feature small { display: inline-flex; margin-top: 18px; padding: 9px 12px; border-radius: 999px; background: rgba(20,99,255,.1); color: var(--accent-blue); font-weight: 800; }
+        .provider-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+        .provider-card { min-height: 68px; display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid rgba(20,99,255,.14); border-radius: 18px; background: rgba(255,255,255,.72); box-shadow: 0 14px 34px rgba(15,53,118,.06); color: var(--ink-blue); font-weight: 800; }
+        .provider-icon { width: 30px; height: 30px; flex: 0 0 auto; }
         .proof-band { border: 1px solid rgba(20,99,255,.14); border-radius: 34px; background: linear-gradient(145deg, rgba(255,255,255,.86), rgba(232,242,255,.72)); color: var(--ink-blue); padding: clamp(24px, 4vw, 44px); display: grid; grid-template-columns: .9fr 1.1fr; gap: 26px; align-items: center; box-shadow: 0 34px 80px rgba(15,53,118,.1); }
         .proof-band blockquote { margin: clamp(24px, 3vw, 34px) 0 clamp(8px, 1.2vw, 14px); font-family: 'Charter', Georgia, serif; font-size: clamp(1.32rem, 2.2vw, 2.35rem); line-height: 1.14; letter-spacing: -.035em; }
         .proof-band cite { display: block; margin-top: 20px; font-style: normal; color: #A9C9FF; font-weight: 800; }

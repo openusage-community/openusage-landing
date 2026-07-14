@@ -2,6 +2,7 @@ import { type MouseEvent, useEffect, useState } from "react"
 import { Download, ExternalLink } from "lucide-react"
 import { AppPreview } from "./AppPreview"
 import communityArticlePreviewData from "./generated/community-article-previews.json"
+import { providerCatalog } from "./provider-catalog"
 import {
   type DownloadPlatform,
   type ReleaseDownloadOptions,
@@ -97,6 +98,15 @@ function GithubIcon() {
 
 function PlatformLogo({ file, className }: { file: string; className: string }) {
   return <img className={`platform-logo ${className}`} src={`${assetBaseUrl}references/${file}`} alt="" aria-hidden="true" />
+}
+
+function getProviderIconColor(brandColor: string, isDark: boolean) {
+  const hex = brandColor.slice(1)
+  const channels = [0, 2, 4].map((offset) => parseInt(hex.slice(offset, offset + 2), 16) / 255)
+  const linear = channels.map((channel) => (channel <= 0.03928 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4))
+  const luminance = 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+
+  return isDark && luminance < 0.15 ? "#ffffff" : brandColor
 }
 
 function formatArticleDate(value?: string) {
@@ -341,6 +351,7 @@ export default function App() {
           <div id="primary-menu" className={isMenuOpen ? "nav-links is-open" : "nav-links"}>
             <div className="nav-link-group">
               <a href="#features" onClick={(event) => handleSectionLinkClick(event, "features")}>Features</a>
+              <a href="#providers" onClick={(event) => handleSectionLinkClick(event, "providers")}>Providers</a>
               <a href="#platforms" onClick={(event) => handleSectionLinkClick(event, "platforms")}>Platforms</a>
               <a href="#proof" onClick={(event) => handleSectionLinkClick(event, "proof")}>Proof</a>
               <a href="#faq" onClick={(event) => handleSectionLinkClick(event, "faq")}>FAQ</a>
@@ -391,6 +402,35 @@ export default function App() {
           </div>
         </section>
 
+        <section id="providers" aria-labelledby="providers-title">
+          <div className="section-head">
+            <h2 id="providers-title">All supported providers.</h2>
+            <p>OpenUsage currently tracks usage across {providerCatalog.length} AI providers, from coding assistants to research and chat tools.</p>
+          </div>
+          <ul className="provider-grid" aria-label="Supported AI providers">
+            {providerCatalog.map((provider) => (
+              <li className="provider-card" key={provider.id}>
+                <span
+                  className="provider-icon"
+                  aria-hidden="true"
+                  style={{
+                    backgroundColor: getProviderIconColor(provider.brandColor, isDark),
+                    WebkitMaskImage: `url(${assetBaseUrl}references/plugins/${provider.id}.svg)`,
+                    WebkitMaskSize: "contain",
+                    WebkitMaskRepeat: "no-repeat",
+                    WebkitMaskPosition: "center",
+                    maskImage: `url(${assetBaseUrl}references/plugins/${provider.id}.svg)`,
+                    maskSize: "contain",
+                    maskRepeat: "no-repeat",
+                    maskPosition: "center",
+                  }}
+                />
+                <span>{provider.name}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
         <section id="platforms" aria-labelledby="platforms-title">
           <div className="section-head">
             <h2 id="platforms-title">Supported operating systems.</h2>
@@ -425,7 +465,7 @@ export default function App() {
               <blockquote>Track the AI providers you already use, keep Linux support first-class, and own a desktop ledger that stays free to inspect, run, and improve.</blockquote>
             </div>
             <div className="proof-stats">
-              <div><b>15+</b><span>providers supported across chat, coding, search, and creative AI tools</span></div>
+              <div><b>{providerCatalog.length}</b><span>providers supported across chat, coding, search, and creative AI tools</span></div>
               <div><b>Linux</b><span>first-class builds for AppImage, deb, and rpm workflows</span></div>
               <div><b>MIT</b><span>licensed so the code stays simple to inspect, fork, and reuse</span></div>
               <div><b>Open</b><span>source project with community-maintained releases and contributions</span></div>
