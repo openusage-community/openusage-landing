@@ -187,8 +187,8 @@ function DownloadModal({
 }) {
   const config = release?.options[platform]
   const isMacOs = platform === "macos"
-  const title = platform === "linux" ? "Download OpenUsage for Linux" : "Download OpenUsage for macOS"
-  const modalTitle = isMacOs ? title : config?.title ?? title
+  const fallbackTitle = `Download OpenUsage for ${platform === "windows" ? "Windows" : "Linux"}`
+  const modalTitle = isMacOs ? "Download OpenUsage for macOS" : config?.title ?? fallbackTitle
   const modalIntro = isMacOs
     ? "Install OpenUsage with Homebrew. The same cask works for Apple Silicon and Intel Macs."
     : config?.intro ?? "Fetching the newest release from GitHub."
@@ -449,11 +449,11 @@ export default function App() {
               <h3>macOS</h3>
               <p>Native-feeling tracking for Mac workflows across research, writing, coding, and creative AI tools.</p>
             </button>
-            <button className="platform-card coming" type="button" disabled>
+            <button className="platform-card" type="button" onClick={() => openDownloadModal("windows")}>
               <PlatformLogo file="windows-logo.svg" className="platform-logo-windows" />
-              <span className="platform-status">Coming soon</span>
+              <span className="platform-status">Available now</span>
               <h3>Windows</h3>
-              <p>A Windows build is on the roadmap so the same free, open-source ledger can follow every desktop workflow.</p>
+              <p>Choose an installer for Windows to start tracking your AI usage locally.</p>
             </button>
           </div>
         </section>
